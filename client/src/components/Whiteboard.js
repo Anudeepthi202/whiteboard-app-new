@@ -5,7 +5,7 @@ import DrawingCanvas from './DrawingCanvas';
 import Toolbar from './Toolbar';
 import UserCursors from './UserCursors';
 
-const socket = io('http://localhost:5000'); // Backend server
+const socket = io(process.env.REACT_APP_API_URL);
 
 function Whiteboard() {
   const { roomId } = useParams();

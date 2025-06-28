@@ -9,27 +9,27 @@ function RoomJoin() {
 
   // JOIN ROOM
   const handleJoin = async () => {
-    const code = roomCode.trim();
-    if (code.length < 6 || code.length > 8) {
-      alert('Room code must be 6 to 8 characters.');
-      return;
-    }
+  const code = roomCode.trim();
+  if (code.length < 6 || code.length > 8) {
+    alert('Room code must be 6 to 8 characters.');
+    return;
+  }
 
-    try {
-      const response = await axios.post('http://localhost:5000/api/rooms/join', {
-        roomId: code,
-      });
+  try {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/rooms/join`, {
+      roomId: code,
+    });
 
-      if (response.data.success) {
-        navigate(`/room/${code}`);
-      } else {
-        alert('Unable to join room.');
-      }
-    } catch (err) {
-      console.error('Join error:', err);
-      alert('Server error. Try again.');
+    if (response.data.success) {
+      navigate(`/room/${code}`);
+    } else {
+      alert('Unable to join room.');
     }
-  };
+  } catch (err) {
+    console.error('Join error:', err);
+    alert('Server error. Try again.');
+  }
+};
 
   // CREATE ROOM
   const handleCreate = async () => {
